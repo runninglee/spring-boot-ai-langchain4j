@@ -8,5 +8,6 @@ langchain4j:
     dashscope:
       chat-model:
         api-key: sk-56e46db3b35443c2a0fc282db68a81c2
-        model-name: deepseek-v3
+        model-name: qwen-plus
+#        model-name: deepseek-v3
 

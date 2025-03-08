@@ -1,6 +1,7 @@
 package vip.lycheer.langchain4j.config;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.service.SystemMessage;
 import lombok.RequiredArgsConstructor;
 import dev.langchain4j.service.AiServices;
 import org.springframework.context.annotation.Bean;
