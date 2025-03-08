@@ -36,7 +36,7 @@ public class MemoryApi {
     }
 
     @GetMapping("high")
-    public String highChat(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
-        return assistant.chat(message);
+    public String highChat(@RequestParam(value = "memoryId") String memoryId, @RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
+        return assistant.chat(memoryId, message);
     }
 }
