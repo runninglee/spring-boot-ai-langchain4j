@@ -22,8 +22,8 @@ public class EmbeddingStoreInit {
                 .port(pgConfig.getPort())
                 .user(pgConfig.getUser())
                 .password(pgConfig.getPassword())
-                .dimension(1024)//阿里云text-embedding-v3向量模型
-//                .dimension(384)
-                .database(pgConfig.getDatabase()).build();
+                .dimension(1024)
+                .database(pgConfig.getDatabase())
+                .build();
     }
 }

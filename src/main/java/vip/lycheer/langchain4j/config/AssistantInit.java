@@ -15,8 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import vip.lycheer.langchain4j.service.Assistant;
 
-import java.util.List;
-
 @Configuration
 @RequiredArgsConstructor
 public class AssistantInit {

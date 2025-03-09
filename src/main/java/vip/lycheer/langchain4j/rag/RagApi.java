@@ -36,7 +36,7 @@ public class RagApi {
         EmbeddingStoreIngestor.builder()
                 .embeddingStore(embeddingStore)
                 .embeddingModel(embeddingModel)
-                .documentSplitter(new DocumentByLineSplitter(300, 50))
+                .documentSplitter(new DocumentByLineSplitter(30, 20))
                 .build()
                 .ingest(documents);
         return "Success";
