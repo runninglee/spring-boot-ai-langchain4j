@@ -1,8 +1,11 @@
 package vip.lycheer.langchain4j.config;
 
+import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.model.output.Response;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
@@ -11,6 +14,8 @@ import dev.langchain4j.service.AiServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import vip.lycheer.langchain4j.service.Assistant;
+
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,6 +28,7 @@ public class AssistantInit {
     public EmbeddingStore<TextSegment> initEmbeddingStore() {
         return new InMemoryEmbeddingStore<>();
     }
+
 
     @Bean
     public Assistant init(EmbeddingStore<TextSegment> embeddingStore) {

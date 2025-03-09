@@ -38,7 +38,7 @@ public class RagApi {
     }
 
     @GetMapping("high")
-    public String high(@RequestParam(value = "memoryId") String memoryId, @RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
-        return assistant.chat(memoryId, message);
+    public String high(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
+        return assistant.chat(message);
     }
 }
