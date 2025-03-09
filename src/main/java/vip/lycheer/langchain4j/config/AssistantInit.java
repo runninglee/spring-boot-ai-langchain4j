@@ -22,12 +22,11 @@ import java.util.List;
 public class AssistantInit {
     final ChatLanguageModel chatLanguageModel;
 
-    //实例化向量数据库
-
-    @Bean
-    public EmbeddingStore<TextSegment> initEmbeddingStore() {
-        return new InMemoryEmbeddingStore<>();
-    }
+    //实例化内存向量数据库
+//    @Bean
+//    public EmbeddingStore<TextSegment> initEmbeddingStore() {
+//        return new InMemoryEmbeddingStore<>();
+//    }
 
 
     @Bean
@@ -35,6 +34,7 @@ public class AssistantInit {
         return AiServices.builder(Assistant.class)
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
                 .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
-                .chatLanguageModel(chatLanguageModel).build();
+                .chatLanguageModel(chatLanguageModel)
+                .build();
     }
 }

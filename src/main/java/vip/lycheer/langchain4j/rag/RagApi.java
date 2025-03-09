@@ -2,13 +2,8 @@ package vip.lycheer.langchain4j.rag;
 
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
-import dev.langchain4j.data.message.SystemMessage;
-import dev.langchain4j.data.message.UserMessage;
+import dev.langchain4j.data.document.splitter.DocumentByLineSplitter;
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.memory.ChatMemory;
-import dev.langchain4j.memory.chat.MessageWindowChatMemory;
-import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
@@ -30,10 +25,20 @@ public class RagApi {
 
     final EmbeddingStore<TextSegment> embeddingStore;
 
+    final EmbeddingModel embeddingModel;
+
     @GetMapping("load")
     public String load() {
         List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/rag");
-        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+        //默认模式
+//        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+        //动态切分
+        EmbeddingStoreIngestor.builder()
+                .embeddingStore(embeddingStore)
+                .embeddingModel(embeddingModel)
+                .documentSplitter(new DocumentByLineSplitter(300, 50))
+                .build()
+                .ingest(documents);
         return "Success";
     }
 
