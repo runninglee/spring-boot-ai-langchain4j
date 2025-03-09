@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import dev.langchain4j.service.AiServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import vip.lycheer.langchain4j.func.HighSum;
 import vip.lycheer.langchain4j.service.Assistant;
 
 @Configuration
@@ -29,6 +30,8 @@ public class AssistantInit {
 
     @Bean
     public Assistant init(EmbeddingStore<TextSegment> embeddingStore) {
-        return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore)).chatLanguageModel(chatLanguageModel).build();
+        return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
+                //调用 Function Calling,比较简单
+                .tools(new HighSum()).chatLanguageModel(chatLanguageModel).build();
     }
 }

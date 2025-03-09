@@ -24,19 +24,15 @@ public class RagApi {
     final Assistant assistant;
 
     final EmbeddingStore<TextSegment> embeddingStore;
+    final EmbeddingModel embeddingModel;
 
     @GetMapping("load")
     public String load() {
         List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/rag");
-        //默认模式
+        //默认模式向量存储
         EmbeddingStoreIngestor.ingest(documents, embeddingStore);
-        //构建方式
-//        EmbeddingStoreIngestor.builder()
-//                .embeddingStore(embeddingStore)
-//                .embeddingModel(embeddingModel)
-//                .documentSplitter(new DocumentByLineSplitter(30, 20))
-//                .build()
-//                .ingest(documents);
+        //构建方式EmbeddingMode 接口暂时无法使用
+//        EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(30, 20)).build().ingest(documents);
         return "Success";
     }
 
