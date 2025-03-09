@@ -20,3 +20,7 @@ pgvector:
   password: 123456@Root
   table: my_embeddings
 
+search:
+  apiKey: sKdf8vDojwr2pTH7FwYa8A2U
+  engine: baidu
+

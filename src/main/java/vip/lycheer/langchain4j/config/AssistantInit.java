@@ -9,6 +9,8 @@ import dev.langchain4j.model.output.Response;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
+import dev.langchain4j.web.search.WebSearchTool;
+import dev.langchain4j.web.search.searchapi.SearchApiWebSearchEngine;
 import lombok.RequiredArgsConstructor;
 import dev.langchain4j.service.AiServices;
 import org.springframework.context.annotation.Bean;
@@ -29,9 +31,11 @@ public class AssistantInit {
 
 
     @Bean
-    public Assistant init(EmbeddingStore<TextSegment> embeddingStore) {
+    public Assistant init(EmbeddingStore<TextSegment> embeddingStore, SearchApiWebSearchEngine engine) {
         return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 //调用 Function Calling,比较简单
-                .tools(new HighSum()).chatLanguageModel(chatLanguageModel).build();
+                //联网搜索能力
+                .tools(new HighSum(), new WebSearchTool(engine))
+                .chatLanguageModel(chatLanguageModel).build();
     }
 }
