@@ -35,7 +35,8 @@ public class AssistantInit {
         return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 //调用 Function Calling,比较简单
                 //联网搜索能力
-                .tools(new HighSum(), new WebSearchTool(engine))
-                .chatLanguageModel(chatLanguageModel).build();
+                //.tools(new HighSum(), new WebSearchTool(engine))
+                //移除联网检索
+                .tools(new HighSum()).chatLanguageModel(chatLanguageModel).build();
     }
 }
