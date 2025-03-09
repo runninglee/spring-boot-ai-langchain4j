@@ -4,8 +4,8 @@ import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
-import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.store.embedding.EmbeddingStore;
+import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 import lombok.RequiredArgsConstructor;
 import dev.langchain4j.service.AiServices;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,18 @@ import vip.lycheer.langchain4j.service.Assistant;
 public class AssistantInit {
     final ChatLanguageModel chatLanguageModel;
 
+    //实例化向量数据库
+
     @Bean
-    public Assistant init() {
-        return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).chatLanguageModel(chatLanguageModel).build();
+    public EmbeddingStore<TextSegment> initEmbeddingStore() {
+        return new InMemoryEmbeddingStore<>();
+    }
+
+    @Bean
+    public Assistant init(EmbeddingStore<TextSegment> embeddingStore) {
+        return AiServices.builder(Assistant.class)
+                .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
+                .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
+                .chatLanguageModel(chatLanguageModel).build();
     }
 }

@@ -1,14 +1,11 @@
 # spring-boot-ai-langchain4j
 
-### 应用
+阿里百炼大平台模型调用,核心模型qwen-plus，能力突出比较均衡
 
-### 1、Low&High方式调用
+#### 应用能力
 
-使用 Low方式即可，简单灵活
- 
-### 2、角色设置
+* 1、角色设置
+* 2、会话保持
+* 3、RAG
 
-使用 SystemMessage
-
-### 保持上下文
 

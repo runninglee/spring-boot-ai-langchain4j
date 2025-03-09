@@ -22,12 +22,12 @@ public class ChatApi {
     final Assistant assistant;
 
     @GetMapping("low")
-    public String lowChat(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
+    public String low(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
         return chatLanguageModel.chat(List.of(SystemMessage.systemMessage("假如你是特朗普，接下来请以特朗普的语气来对话"), UserMessage.from(message))).aiMessage().text();
     }
 
     @GetMapping("high")
-    public String highChat(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
+    public String high(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
         return assistant.chat(message);
     }
 }
