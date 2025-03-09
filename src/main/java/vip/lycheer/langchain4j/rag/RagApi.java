@@ -1,5 +1,6 @@
 package vip.lycheer.langchain4j.rag;
 
+import dev.langchain4j.community.model.dashscope.QwenEmbeddingModel;
 import dev.langchain4j.data.document.Document;
 import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.document.splitter.DocumentByLineSplitter;
@@ -24,7 +25,6 @@ public class RagApi {
     final Assistant assistant;
 
     final EmbeddingStore<TextSegment> embeddingStore;
-    final EmbeddingModel embeddingModel;
 
     @GetMapping("load")
     public String load() {
@@ -32,7 +32,7 @@ public class RagApi {
         //默认模式向量存储
         EmbeddingStoreIngestor.ingest(documents, embeddingStore);
         //构建方式EmbeddingMode 接口暂时无法使用
-//        EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(30, 20)).build().ingest(documents);
+        //EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(30, 20)).build().ingest(documents);
         return "Success";
     }
 
