@@ -29,10 +29,6 @@ public class AssistantInit {
 
     @Bean
     public Assistant init(EmbeddingStore<TextSegment> embeddingStore) {
-        return AiServices.builder(Assistant.class)
-                .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10))
-                .contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
-                .chatLanguageModel(chatLanguageModel)
-                .build();
+        return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore)).chatLanguageModel(chatLanguageModel).build();
     }
 }
