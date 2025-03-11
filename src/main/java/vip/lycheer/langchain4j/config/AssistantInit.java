@@ -1,15 +1,13 @@
 package vip.lycheer.langchain4j.config;
 
-import dev.langchain4j.data.embedding.Embedding;
+
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.embedding.EmbeddingModel;
-import dev.langchain4j.model.output.Response;
+
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
 import dev.langchain4j.store.embedding.EmbeddingStore;
-import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
-import dev.langchain4j.web.search.WebSearchTool;
+
 import dev.langchain4j.web.search.searchapi.SearchApiWebSearchEngine;
 import lombok.RequiredArgsConstructor;
 import dev.langchain4j.service.AiServices;

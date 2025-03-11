@@ -62,7 +62,6 @@
             <artifactId>langchain4j</artifactId>
             <version>${langchain.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/dev.langchain4j/langchain4j-community-bom -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-community-bom</artifactId>
