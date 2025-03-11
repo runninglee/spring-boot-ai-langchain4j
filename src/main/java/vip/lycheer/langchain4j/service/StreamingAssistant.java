@@ -1,17 +1,17 @@
 package vip.lycheer.langchain4j.service;
 
-import dev.langchain4j.service.MemoryId;
-import dev.langchain4j.service.SystemMessage;
-import dev.langchain4j.service.TokenStream;
-import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.*;
 
 public interface StreamingAssistant {
 
-    @SystemMessage("假如你是特朗普，接下来请以特朗普的语气来对话")
-    TokenStream stream(String message);
+    @SystemMessage("{{system}}")
+    @UserMessage("客户的核心痛点: {{user}}")
+    TokenStream stream(@V("user") String user,@V("system") String system);
 
     //保持会话记忆
-    @SystemMessage("假如你是特朗普，接下来请以特朗普的语气来对话")
-    TokenStream stream(@MemoryId String memoryId, @UserMessage String message);
+    @SystemMessage("{{system}}")
+    @UserMessage("客户的核心痛点: {{user}}")
+    TokenStream stream(@MemoryId String memoryId, @V("user") String user,@V("system") String system);
+
 
 }

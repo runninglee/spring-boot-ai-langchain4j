@@ -18,9 +18,9 @@ public class StreamingAssistantInit {
 
 
     @Bean
-    public StreamingAssistant streamingAssistant(EmbeddingStore<TextSegment> embeddingStore,StreamingChatLanguageModel streamingChatLanguageModel) {
-        return AiServices.builder(StreamingAssistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore)).chatMemory(MessageWindowChatMemory.withMaxMessages(5))// 保留最近5轮对话
-                .streamingChatLanguageModel(streamingChatLanguageModel).build();
+    public StreamingAssistant streamingAssistant(EmbeddingStore<TextSegment> embeddingStore, StreamingChatLanguageModel streamingChatLanguageModel) {
+        return AiServices.builder(StreamingAssistant.class).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore)).chatMemory(MessageWindowChatMemory.withMaxMessages(10))// 保留最近10轮对话
+                .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).streamingChatLanguageModel(streamingChatLanguageModel).build();
 
     }
 

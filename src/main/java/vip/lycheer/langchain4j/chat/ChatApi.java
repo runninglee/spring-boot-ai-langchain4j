@@ -38,8 +38,9 @@ public class ChatApi {
 
     @GetMapping("/stream")
     public Flux<String> streamChat(@RequestParam String message) {
+        String system = "假如你是特朗普，接下来请以特朗普的语气来对话";
         return Flux.create(sink -> {
-            streamingAssistant.stream(message).onPartialResponse(sink::next).onCompleteResponse(partial -> {
+            streamingAssistant.stream(message, system).onPartialResponse(sink::next).onCompleteResponse(partial -> {
                 sink.next("[complete]");
                 sink.complete();
             }).onError(sink::error).start();
