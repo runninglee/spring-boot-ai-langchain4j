@@ -4,6 +4,7 @@ import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +37,7 @@ public class ChatApi {
         return assistant.chat(message);
     }
 
-    @GetMapping("/stream")
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE + ";charset=UTF-8")
     public Flux<String> streamChat(@RequestParam String message) {
         String system = "假如你是特朗普，接下来请以特朗普的语气来对话";
         return Flux.create(sink -> {
