@@ -29,7 +29,7 @@ public class AssistantInit {
 
 
     @Bean
-    public Assistant init(EmbeddingStore<TextSegment> embeddingStore, SearchApiWebSearchEngine engine) {
+    public Assistant assistant(EmbeddingStore<TextSegment> embeddingStore, SearchApiWebSearchEngine engine) {
         return AiServices.builder(Assistant.class).chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(10)).contentRetriever(EmbeddingStoreContentRetriever.from(embeddingStore))
                 //调用 Function Calling,比较简单
                 //联网搜索能力
@@ -37,4 +37,6 @@ public class AssistantInit {
                 //移除联网检索
                 .tools(new HighSum()).chatLanguageModel(chatLanguageModel).build();
     }
+
+
 }

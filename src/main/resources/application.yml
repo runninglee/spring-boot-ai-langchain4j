@@ -9,6 +9,9 @@ langchain4j:
       chat-model:
         api-key: sk-56e46db3b35443c2a0fc282db68a81c2
         model-name: qwen-plus
+      streaming-chat-model:
+        api-key: sk-56e46db3b35443c2a0fc282db68a81c2
+        model-name: qwen-plus
       embedding-model:
         api-key: sk-56e46db3b35443c2a0fc282db68a81c2
         model-name: text-embedding-v2
@@ -19,7 +22,6 @@ pgvector:
   user: postgres
   password: 123456@Root
   table: my_embeddings
-
 search:
   apiKey: sKdf8vDojwr2pTH7FwYa8A2U
   engine: baidu
