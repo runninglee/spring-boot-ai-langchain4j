@@ -33,7 +33,7 @@ public class RagApi {
         List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/rag");
         //默认模式向量存储
 //        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
-        //构建方式EmbeddingMode 接口暂时无法使用
+        //构建方式EmbeddingMode,支持本地RAG
         EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(100, 50)).build().ingest(documents);
         return "Success";
     }
