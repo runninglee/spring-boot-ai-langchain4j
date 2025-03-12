@@ -13,6 +13,16 @@ public class EmbeddingStoreInit {
 
     @Bean
     public EmbeddingStore<TextSegment> initEmbeddingStore() {
-        return PgVectorEmbeddingStore.builder().table(pgConfig.getTable()).dropTableFirst(true).createTable(true).host(pgConfig.getHost()).port(pgConfig.getPort()).user(pgConfig.getUser()).password(pgConfig.getPassword()).dimension(384).database(pgConfig.getDatabase()).build();
+        return PgVectorEmbeddingStore.builder()
+                .table(pgConfig.getTable())
+                .dropTableFirst(true)
+                .createTable(true)
+                .host(pgConfig.getHost())
+                .port(pgConfig.getPort())
+                .user(pgConfig.getUser())
+                .password(pgConfig.getPassword())
+                .dimension(384)
+                .database(pgConfig.getDatabase())
+                .build();
     }
 }

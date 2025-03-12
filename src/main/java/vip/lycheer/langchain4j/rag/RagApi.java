@@ -6,6 +6,7 @@ import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.document.splitter.DocumentByLineSplitter;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +26,15 @@ public class RagApi {
     final Assistant assistant;
 
     final EmbeddingStore<TextSegment> embeddingStore;
+    final EmbeddingModel embeddingModel = new AllMiniLmL6V2EmbeddingModel();
 
     @GetMapping("load")
     public String load() {
         List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/rag");
         //默认模式向量存储
-        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
+//        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
         //构建方式EmbeddingMode 接口暂时无法使用
-        //EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(30, 20)).build().ingest(documents);
+        EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(100, 50)).build().ingest(documents);
         return "Success";
     }
 
