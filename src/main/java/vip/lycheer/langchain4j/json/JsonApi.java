@@ -33,9 +33,8 @@ public class JsonApi {
 //                .type(ResponseFormatType.JSON)
 //                .jsonSchema(JsonSchema.builder()
 //                        .rootElement(JsonObjectSchema.builder()
-//                                .addIntegerProperty("age", "the person's age")
-//                                .addIntegerProperty("weight", "the person's weight")
-//                                .required("age", "weight")
+//                                .addIntegerProperty("age")
+//                                .addIntegerProperty("weight")
 //                                .build())
 //                        .build())
 //                .build();
@@ -52,5 +51,12 @@ public class JsonApi {
         PersonService personService = AiServices.create(PersonService.class, chatLanguageModel);
         Person person = personService.extractPerson(message);
         return person.toString();
+    }
+
+    @GetMapping("search")
+    public String search(@RequestParam(value = "message") String message) {
+        SearchParamService searchParamService = AiServices.create(SearchParamService.class, chatLanguageModel);
+        SearchParam searchParam = searchParamService.json(message);
+        return searchParam.toString();
     }
 }
