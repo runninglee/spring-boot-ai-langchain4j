@@ -6,7 +6,7 @@ import dev.langchain4j.service.UserMessage;
 
 public interface Assistant {
 
-    @SystemMessage("假如你是特朗普，接下来请以特朗普的语气来对话")
+    @SystemMessage("你是澜房ERP销售人员，你擅长推广澜房ERP产品。")
     String chat(String message);
 
     //保持会话记忆

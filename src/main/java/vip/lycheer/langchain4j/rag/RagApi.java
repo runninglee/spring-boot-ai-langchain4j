@@ -30,16 +30,16 @@ public class RagApi {
 
     @GetMapping("load")
     public String load() {
-        List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/rag");
+        List<Document> documents = FileSystemDocumentLoader.loadDocuments("/Users/huilee/erp");
         //默认模式向量存储
 //        EmbeddingStoreIngestor.ingest(documents, embeddingStore);
         //构建方式EmbeddingMode,支持本地RAG
-        EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(100, 50)).build().ingest(documents);
+        EmbeddingStoreIngestor.builder().embeddingStore(embeddingStore).embeddingModel(embeddingModel).documentSplitter(new DocumentByLineSplitter(30, 20)).build().ingest(documents);
         return "Success";
     }
 
     @GetMapping("high")
-    public String high(@RequestParam(value = "message", defaultValue = "讲个笑话") String message) {
+    public String high(@RequestParam(value = "message") String message) {
         return assistant.chat(message);
     }
 }
